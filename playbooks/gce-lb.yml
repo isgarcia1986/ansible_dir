@@ -1,0 +1,24 @@
+---
+- name: Playbook to create gce load balancing instance
+  hosts: localhost
+  connection: local
+  gather_facts: No
+  
+  vars:
+    service_account_email: webon123@ansible-proyect.iam.gserviceaccount.com
+    credentials_file: ansible-proyect-8923da4c188d.json
+    project_id: ansible-proyect
+  tasks:
+    - name: Create gce load balancer
+      gce_lb:
+        name: lbserver
+        state: present
+        region: us-east1
+        members: ['us-east1-b/web3','us-east1-b/web4','us-east1-b/web5']
+        httphealthcheck_name: hc
+        httphealthcheck_port: 80
+        httphealthcheck_path: "/"
+        service_account_email: "{{ service_account_email }}"
+        credentials_file: "{{ credentials_file }}"
+        project_id: "{{ project_id }}"
+

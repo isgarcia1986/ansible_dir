@@ -1,0 +1,24 @@
+---
+- name: Playbook test to create gce instance
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+      service_account_email: webon123@ansible-proyect.iam.gserviceaccount.com
+      credentials_file: ansible-proyect-8923da4c188d.json
+      project_id: ansible-proyect
+      machine_type: n1-standard-1
+      image: centos-7
+
+  tasks:
+     - name: Launch instances
+       gce:
+         zone: us-east1-b
+         instance_names: cloud-test4
+         machine_type: "{{ machine_type }}"
+         image: "{{ image }}"
+         service_account_email: "{{ service_account_email }}"
+         credentials_file: "{{ credentials_file }}"
+         project_id: "{{ project_id }}"
+         metadata: '{"sshKeys":"isgarcia1986:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDb9HXAtOs2HU5t2NyxOV5QeWPbypnUYKWaiK67hP7V7sXeZjtLzbF4lOP+JCUy1ydMhHy+JUYz8vp6ZzbYbvlnaZiQ1GgP85N+79ppWb8zh2/P2e/TKP+tluIyBatezQ62IucunrIZbSQ3ga1xneR3exZWXdciyY4i6DKJTl7YfPkO3Y+vk9dL6zTZ3kjfwLOT4SrqCF68y0vLnyuMGaSQ9gRbeKi51LLdcJLJi577eatTEZAdBNgacYRY6pF8p/jVgkKPea52kF1XCfFrAe/bZnfmeSQyfXBk2WkXTaix3SRIaHTYSUKcn3faXl9likmYj3jDkKEsY3JbxgSwsDZsnWAFOIE0ibaWBDzwV0KaohYTi5cGasMPJzICRezmGjyU67Le8hMe3MPQN9afX6Y8ntHATDqc1yOfkW3RvpAINI+/Brv1hSkdNn5lkBVABhpurUHWMnH+lfWlV9cpahFzbh4SewCfprmbwV+RQDtimG92epYtoJ03ROpxu9eIGpMdjLeoqoxLWVoVIqpfKQxpf9Yr7ny1ZEocCqtS7P+J6AxIFobWmqAcj5Q4RPn4rzSoh7658tIrukGdjzu5XA6MH7xFKHPtSg+XooXCKy3dPLLzxE/xlU86fpCOnjQt9lOXNFq+a7/ZGnh1AO4YaUGRLqxgO7ZM5AHjZtk1n3QuLQ== israel@srv10.tsmx.lab"}'
